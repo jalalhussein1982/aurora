@@ -1,0 +1,12 @@
+import potrace from 'potrace';
+import { readFile, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=dirname(fileURLToPath(import.meta.url));
+const options={threshold:128,blackOnWhite:true,turdSize:40,alphaMax:1.15,optCurve:true,optTolerance:0.8,color:'#000000'};
+const svg=await new Promise((resolveSvg,reject)=>potrace.trace(resolve(root,'alpha-mask.png'),options,(error,result)=>error?reject(error):resolveSvg(result)));
+await writeFile(resolve(root,'contours.svg'),svg);
+const metadata=JSON.parse(await readFile(resolve(root,'contours.json'),'utf8'));
+metadata.curveFit={...options,cubicSegments:(svg.match(/ C /g)||[]).length,lineSegments:(svg.match(/ L /g)||[]).length};
+await writeFile(resolve(root,'contours.json'),JSON.stringify(metadata,null,2));
+console.log(JSON.stringify(metadata.curveFit));

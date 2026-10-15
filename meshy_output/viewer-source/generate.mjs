@@ -1,0 +1,32 @@
+import { build } from 'esbuild';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const root = dirname(fileURLToPath(import.meta.url));
+const out = resolve(root,'..');
+const source = resolve(root,'../../output/brand/working/aurora-logo-generated-cutout-not-approved.png');
+await build({entryPoints:[resolve(root,'generate-model.js')],bundle:true,minify:true,outfile:resolve(root,'generate.bundle.js'),format:'iife',legalComments:'inline'});
+const bundle = await readFile(resolve(root,'generate.bundle.js'),'utf8');
+const contours = await readFile(resolve(root,'contours.json'),'utf8');
+const contourSvg = await readFile(resolve(root,'contours.svg'),'utf8');
+const sourceBase64 = (await readFile(source)).toString('base64');
+const html = `<!doctype html><meta charset="utf-8"><title>Aurora model export</title><script>window.CONTOURS=${contours};window.CONTOUR_SVG=${JSON.stringify(contourSvg)};window.SOURCE_IMAGE="data:image/png;base64,${sourceBase64}";</script><script>${bundle.replaceAll('</script','<\\/script')}</script>`;
+const generator = resolve(root,'generate.html');
+await writeFile(generator,html);
+const browser = await chromium.launch({channel:'chrome',headless:true});
+try {
+  const page = await browser.newPage();
+  const errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(pathToFileURL(generator).href);
+  await page.waitForFunction(()=>window.modelReady||window.modelError,{},{timeout:30000});
+  const error = await page.evaluate(()=>window.modelError);
+  if(error) throw new Error(error);
+  const result = await page.evaluate(()=>window.exportModel());
+  await writeFile(resolve(out,'aurora-logo-relief.glb'),Buffer.from(result.glb,'base64'));
+  await writeFile(resolve(out,'aurora-logo-relief.three.json'),JSON.stringify(result.three));
+  await writeFile(resolve(out,'model-verification.json'),JSON.stringify(result.roundtrip,null,2));
+  console.log(JSON.stringify({glbBytes:Buffer.from(result.glb,'base64').length,components:result.three.object.children.length,roundtrip:result.roundtrip,errors},null,2));
+  if(errors.length) throw new Error(errors.join('\n'));
+} finally { await browser.close(); }

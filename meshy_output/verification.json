@@ -1,0 +1,114 @@
+{
+  "initial": {
+    "camera": [
+      1.435580898675264,
+      0.2283878702437927,
+      6.368758895941172
+    ],
+    "triangles": 119980,
+    "originalDimensions": [
+      2.970051407814026,
+      2.9313324689865112,
+      0.2439999934285879
+    ],
+    "drawCalls": 38,
+    "modelName": "Aurora Production — smooth 3D relief v2",
+    "errorVisible": false
+  },
+  "afterDrag": [
+    -5.93179683769021,
+    1.2059117062722184,
+    -2.456360446593608
+  ],
+  "zoomed": true,
+  "autoRotate": true,
+  "reset": {
+    "camera": [
+      1.433412279906319,
+      0.22842937898803997,
+      6.36924584744336
+    ],
+    "spin": false
+  },
+  "wireframe": true,
+  "download": {
+    "name": "aurora-logo-3d.png",
+    "bytes": 515973
+  },
+  "keyboardRotated": true,
+  "mobile": {
+    "overflow": false,
+    "canvas": {
+      "x": 0,
+      "y": 66,
+      "width": 390,
+      "height": 678,
+      "top": 66,
+      "right": 390,
+      "bottom": 744,
+      "left": 0
+    },
+    "buttons": [
+      {
+        "label": "Auto rotate",
+        "box": {
+          "x": 23.296875,
+          "y": 754,
+          "width": 84.578125,
+          "height": 44,
+          "top": 754,
+          "right": 107.875,
+          "bottom": 798,
+          "left": 23.296875
+        }
+      },
+      {
+        "label": "Reset view",
+        "box": {
+          "x": 113.875,
+          "y": 754,
+          "width": 82.578125,
+          "height": 44,
+          "top": 754,
+          "right": 196.453125,
+          "bottom": 798,
+          "left": 113.875
+        }
+      },
+      {
+        "label": "Wireframe",
+        "box": {
+          "x": 202.453125,
+          "y": 754,
+          "width": 80.359375,
+          "height": 44,
+          "top": 754,
+          "right": 282.8125,
+          "bottom": 798,
+          "left": 202.453125
+        }
+      },
+      {
+        "label": "Save PNG",
+        "box": {
+          "x": 288.8125,
+          "y": 754,
+          "width": 77.875,
+          "height": 44,
+          "top": 754,
+          "right": 366.6875,
+          "bottom": 798,
+          "left": 288.8125
+        }
+      }
+    ]
+  },
+  "errors": [],
+  "externalRequests": [],
+  "packaging": {
+    "embeddedScripts": 2,
+    "externalScripts": false,
+    "htmlBytes": 17491490
+  },
+  "passed": true
+}

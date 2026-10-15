@@ -1,0 +1,11 @@
+**/node_modules/
+**/backups/
+.firecrawl/
+tmp/
+.env
+.env.*
+.DS_Store
+**/*.log
+**/generate.html
+**/*.bundle.js
+**/alpha-mask.png

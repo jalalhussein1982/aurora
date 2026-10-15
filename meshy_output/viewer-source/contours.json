@@ -1,0 +1,20 @@
+{
+  "width": 1254,
+  "height": 1254,
+  "sourceWidth": 1254,
+  "sourceHeight": 1254,
+  "alphaThreshold": 175,
+  "blurRadius": 1.4,
+  "method": "Full-resolution cubic Bezier fitting",
+  "curveFit": {
+    "threshold": 128,
+    "blackOnWhite": true,
+    "turdSize": 40,
+    "alphaMax": 1.15,
+    "optCurve": true,
+    "optTolerance": 0.8,
+    "color": "#000000",
+    "cubicSegments": 357,
+    "lineSegments": 1
+  }
+}

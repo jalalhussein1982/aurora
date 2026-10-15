@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "esbuild": "0.25.10",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "potrace": "2.1.8"
+  }
+}
